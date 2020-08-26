@@ -22,11 +22,8 @@ public class Contacts{
     public String getEmail(){return email;}
     public void setEmail(){this.email = email;}
 
-    /**
-     * This method takes in a list of Instructor objects and returns a list of name strings
-     * @param instructors is a list of Instructor objects
-     * @return a list of String objects based off of the names of the passed in list of Instructor objects
-     */
+
+     //TAKES IN LIST OF CONTACTS OBJECTS AND RETURNS A LIST OF NAME STRINGS
     public static List<String> contactsToNameStrings(List<Contacts> contacts) {
         List<String> names = new ArrayList<>();
         for (Contacts contact : contacts) {
@@ -35,15 +32,12 @@ public class Contacts{
         return names;
     }
 
-    /**
-     * This method takes in a list of name strings and returns a list of Instructor objects
-     * @param names is a list of name strings
-     * @return a list of Instructor objects with matching names to the input list of name strings
-     */
-    public static List<Instructor> nameStringsToInstructors(List<String> names) {
-        List<Instructor> instructors = new ArrayList<>();
+
+     //TAKES IN LIST OF NAME STRINGS AND RETURNS LIST OF CONTACTS OBJECTS
+    public static List<Contacts> nameStringsToContacts(List<String> names) {
+        List<Instructor> contacts = new ArrayList<>();
         for (String name : names) {
-            instructors.add(new Instructor(name));
+            instructors.add(new Contacts(name));
         }
         return instructors;
     }

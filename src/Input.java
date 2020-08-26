@@ -31,10 +31,15 @@ public class Input {
         int num;
         do {
             num = this.scanner.nextInt();
-            if (num >= min && num <= max) {
-                flag = true;
-            } else {
-                System.out.println("Invalid response.");
+            try {
+                if (num >= min && num <= max) {
+                    num = Integer.valueOf(getString());
+                    flag = true;
+                } else {
+                    System.out.println("Invalid response.");
+                }
+            } catch(NumberFormatException e){
+                e.printStackTrace();
             }
         } while(!flag);
         return num;

@@ -8,27 +8,43 @@ import java.util.List;
 
 public class ContactsApplication{
     public static void main(String[] args) {
-    Input input = new Input();
-    List<Contact> fields;
-    List<String> contacts;
+        Input input = new Input();
+        List<Contacts> contacts;
+        List<String> names = new ArrayList<>();
 
-    Path p = Paths.get("src/data/contacts.txt");
+        Path p = Paths.get("src/data/contacts.txt");
 
-    try {
-        contacts = Files.readAllLines(p);
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        //READ FILE
+        try {
+            names = Files.readAllLines(p);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        contacts = Contacts.nameStringsToContacts(names);
 
-    fields = Contacts.nameStringsToFields(contacts);
+        //EDIT FILES - move to a separate class?
+        public String userInput(){
+            String userInput = input.getInt(0, 4);
+            System.out.println(userInput);
 
-    contacts = Contacts.FieldsToNameStrings(fields);
 
-    try {
-        Files.write(p, contacts);
-    } catch (IOException e){
-        e.printStackTrace();
-    }
+        }
+        /**
+         1. View contacts.
+         2. Add a new contact.
+         3. Search a contact by name.
+         4. Delete an existing contact.
+         5. Exit.
+         Enter an option (1, 2, 3, 4 or 5):
+         */
+
+        //WRITE FILE
+        names = Contacts.contactsToNameStrings(contacts);
+        try {
+            Files.write(p, names);
+        } catch (IOException e){
+            e.printStackTrace();
+        }
 
     }
 }
