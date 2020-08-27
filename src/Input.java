@@ -33,7 +33,7 @@ public class Input {
             num = this.scanner.nextInt();
             try {
                 if (num >= min && num <= max) {
-                    num = Integer.valueOf(getString());
+                    num = Integer.parseInt(getString());
                     flag = true;
                 } else {
                     System.out.println("Invalid response.");
@@ -47,7 +47,7 @@ public class Input {
     public int getInt(){
         int num = 0;
         try {
-            num = Integer.valueOf(getString());
+            num = Integer.parseInt(getString());
         } catch (NumberFormatException e) {
             System.out.println("Invalid response.");
             e.printStackTrace();
@@ -62,7 +62,7 @@ public class Input {
             dubNum = this.scanner.nextDouble();
             try {
                 if (dubNum >= min && dubNum <= max) {
-                    dubNum = Integer.valueOf(getString());
+                    dubNum = Double.parseDouble(getString());
                     flag = true;
                 } else {
                     System.out.println("Invalid response.");
@@ -75,9 +75,9 @@ public class Input {
         return dubNum;
     }
     public double getDouble(){
-        double num;
+        double num = Double.parseDouble(getString());
         try {
-            num = Integer.valueOf(getString());
+            num = Double.parseDouble(getString());
         } catch (NumberFormatException e) {
             System.out.println("Invalid response.");
             e.printStackTrace();
