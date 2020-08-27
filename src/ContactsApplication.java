@@ -7,12 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsApplication{
-    Input input = new Input();
-    //EDIT FILES - move to a separate class?
-    public int userInput(){
-        int userInput = input.getInt(0, 4);
-        return userInput;
-    }
 
     public static void main(String[] args) {
         List<Contacts> contacts;

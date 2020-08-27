@@ -59,5 +59,5 @@ public class Contacts{
         return contacts;
     }
 
-    public static
+
 }
