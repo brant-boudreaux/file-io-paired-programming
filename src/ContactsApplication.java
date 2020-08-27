@@ -7,8 +7,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContactsApplication{
+    Input input = new Input();
+    //EDIT FILES - move to a separate class?
+    public int userInput(){
+        int userInput = input.getInt(0, 4);
+        return userInput;
+    }
+
     public static void main(String[] args) {
-        Input input = new Input();
         List<Contacts> contacts;
         List<String> names = new ArrayList<>();
 
@@ -22,13 +28,7 @@ public class ContactsApplication{
         }
         contacts = Contacts.nameStringsToContacts(names);
 
-        //EDIT FILES - move to a separate class?
-        public String userInput(){
-            String userInput = input.getInt(0, 4);
-            System.out.println(userInput);
 
-
-        }
         /**
          1. View contacts.
          2. Add a new contact.

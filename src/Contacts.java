@@ -9,19 +9,35 @@ public class Contacts{
     private String email;
 
     //CONTACTS CONSTRUCTOR
-    public Contacts(String name, String phone, String email){this.name = name; this.phone = phone, this.email = email}
+    public Contacts(String name){
+        this.name = name;
+        this.phone = phone;
+        this.email = email;
+    }
 
     //NAME SETTER/GETTER
-    public String getName(){return name;}
-    public void setName(){this.name = name;}
+    public String getName(){
+        return name;
+    }
+    public void setName(){
+        this.name = name;
+    }
 
     //PHONE SETTER/GETTER
-    public String getPhone(){return phone;}
-    public void setPhone(){this.phone = phone;}
+    public String getPhone(){
+        return phone;
+    }
+    public void setPhone(){
+        this.phone = phone;
+    }
 
     //EMAIL SETTER/GETTER
-    public String getEmail(){return email;}
-    public void setEmail(){this.email = email;}
+    public String getEmail(){
+        return email;
+    }
+    public void setEmail(){
+        this.email = email;
+    }
 
 
      //TAKES IN LIST OF CONTACTS OBJECTS AND RETURNS A LIST OF NAME STRINGS
@@ -36,10 +52,12 @@ public class Contacts{
 
      //TAKES IN LIST OF NAME STRINGS AND RETURNS LIST OF CONTACTS OBJECTS
     public static List<Contacts> nameStringsToContacts(List<String> names) {
-        List<Instructor> contacts = new ArrayList<>();
+        List<Contacts> contacts = new ArrayList<>();
         for (String name : names) {
-            instructors.add(new Contacts(name));
+            contacts.add(new Contacts(name));
         }
-        return instructors;
+        return contacts;
     }
+
+    public static
 }
