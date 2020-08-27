@@ -8,6 +8,9 @@ public class Contacts{
     private String phone;
     private String email;
 
+    //EMPTY CONSTRUCTOR
+    public Contacts(){}
+
     //CONTACTS CONSTRUCTOR
     public Contacts(String name){
         this.name = name;
