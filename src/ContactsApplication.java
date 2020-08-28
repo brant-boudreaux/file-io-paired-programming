@@ -10,6 +10,7 @@ import java.util.List;
 
 public class ContactsApplication {
     static Input input = new Input();
+    static List<String> names = Response.readFile(new ArrayList<>());
 
     public static void main(String[] args) {
         contactsMenu();
@@ -49,7 +50,7 @@ public class ContactsApplication {
     public static void viewContacts() {
         System.out.println("| Name       |  Phone Number   |  Email       |");
         System.out.println("----------------------------------------------");
-        List<String> contactFile = Response.readFile(p);
+        List<String> contactFile = Response.readFile(names);
         for (String line : contactFile) {
             String[] parts = line.split(",");
                 System.out.println("| " + parts[0] + "   |");
@@ -61,44 +62,37 @@ public class ContactsApplication {
     public static void addContact(){
         System.out.println("What is the name of your new contact?");
         String name = input.getString().trim();
-        List<String> contactFile = Response.readFile(p);
-
-        for (String line : contactFile) {
-            String[] parts = line.split(" ");
-
-            //if (name.equalsIgnoreCase(parts[0])) {
-                //System.out.println("There is already a contact by this name:");
-                //searchContact(name);
-                //System.out.println("\nWould you like to add another contact with this name? Y | N");
-                //boolean yes = input.yesNo();
-                //if (yes) {
-                    addContact(name);
-                    return;
-              //  } else {
-              //      returnToMenu();
-               // }
-            //}
-        }
-
+        List<String> contactFile = Response.readFile(names);
+//        for (String line : contactFile) {
+//            String[] parts = line.split(" ");
+//            //if (name.equalsIgnoreCase(parts[0])) {
+//                //System.out.println("There is already a contact by this name:");
+//                //searchContact(name);
+//                //System.out.println("\nWould you like to add another contact with this name? Y | N");
+//                //boolean yes = input.yesNo();
+//                //if (yes) {
+//                    addContact(name);
+//                    return;
+//              //  } else {
+//              //      returnToMenu();
+//               // }
+//            //}
+//        }
         System.out.println("Please enter the phone number: (xxx)xxx-xxxx");
         String phoneNumber = input.getString().trim();
-
         //boolean validated = validatePhoneNumber(phoneNumber);
 
         //if (validated) {
-
-            Response.names.add(name + " " + phoneNumber);
-            Response.writeToFile();
+            names.add(name + ", " + phoneNumber);
+            Response.writeToFile(names);
             System.out.println("Contact added!");
             returnToMenu();
-
 //        } else {
 //
 //            System.out.println("Invalid format: (xxx)xxx-xxxx");
 //            addContact(name);
 //
 //        }
-
     }
 
     // When contact doesn't exist and user wants to add
@@ -106,16 +100,13 @@ public class ContactsApplication {
 
         System.out.println("Please enter the phone number: (xxx)xxx-xxxx");
         String phoneNumber = input.getString().trim();
-
         //boolean validated = validatePhoneNumber(phoneNumber);
 
 //        if (validated) {
-
-            Response.names.add(name + " " + phoneNumber);
-            Response.writeToFile();
+            names.add(name + " " + phoneNumber);
+            Response.writeToFile(names);
             System.out.println("Contact added!");
             returnToMenu();
-
 //        } else {
 //
 //            System.out.println("Invalid format: (xxx)xxx-xxxx");
@@ -129,14 +120,13 @@ public class ContactsApplication {
     public static void deleteContact() {
         System.out.println("Which contact would you like to delete?");
         String contact = input.getString();
-        List<String> contactFile = Response.readFile(p);
         boolean contactFound = false;
-        for (int i = 0; i < contactFile.size(); i++){
-            String[] contactParts = contactFile.get(i).split(",");
+        for (int i = 0; i < names.size(); i++){
+            String[] contactParts = names.get(i).split(", ");
             if (contact.equalsIgnoreCase(contactParts[0])){
-                Response.contacts.remove(i);
+                names.remove(i);
 //                Response.names.remove(i);
-                Response.writeToFile();
+                Response.writeToFile(names);
                 System.out.println("" + contact + " has been deleted.");
                 returnToMenu();
             }
@@ -156,13 +146,13 @@ public class ContactsApplication {
     static public void searchContacts(){
         System.out.println("Search contact by name:");
         String contact = input.getString();
-        List<String> contactFile = Response.readFile(p);
+        List<String> contactFile = Response.readFile(names);
         boolean found = false;
         for (String line : contactFile) {
-            String[] parts = line.split(",");
+            String[] parts = line.split(", ");
 
             if (contact.equalsIgnoreCase(parts[0])) {
-                System.out.println("Name: " + parts[0] + "\n" + "Number: " + parts[0]);
+                System.out.println("Name: " + parts[0] + "\n" + "Number: " + parts[1]);
                 found = true;
                 returnToMenu();
 
@@ -178,11 +168,10 @@ public class ContactsApplication {
                 returnToMenu();
             }
         }
-
     }
 
     public static void searchContacts(String name) {
-        List<String> searchFile = Response.readFile(p);
+        List<String> searchFile = Response.readFile(names);
 
         for (String contact : searchFile){
             String[] parts = contact.split(",");
