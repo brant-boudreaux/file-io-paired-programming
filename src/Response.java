@@ -6,13 +6,16 @@ import java.util.List;
 import java.nio.file.Files;
 
 public class Response {
-    static List<String> contacts;
 
+
+    static List<Contacts> contacts;
 
     static Path p = Paths.get("src/data/contacts.txt");
 
     //READ FILE
-    public static List<String> readFile() {
+
+    public static List<String> readFile(List<String> names) {
+
         try {
             names = Files.readAllLines(Response.p);
         } catch (
@@ -24,7 +27,7 @@ public class Response {
     }
 
     //WRITE FILE - ADD, EDIT AND DELETE
-    public static void writeToFile() {
+    public static void writeToFile(List<String> names) {
         try {
             Files.write(p, names);
         } catch (IOException e) {
