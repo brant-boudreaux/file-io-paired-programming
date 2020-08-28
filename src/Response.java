@@ -24,12 +24,12 @@ public class Response {
     }
 
     //WRITE FILE - ADD, EDIT AND DELETE
-    public void writeToFile() {
-        names = Contacts.contactsToNameStrings(contacts);
+    public static void writeToFile() {
         try {
             Files.write(p, names);
         } catch (IOException e) {
             e.printStackTrace();
         }
+        names = Contacts.contactsToNameStrings(contacts);
     }
 }

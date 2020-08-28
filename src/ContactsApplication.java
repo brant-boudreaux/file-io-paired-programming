@@ -67,7 +67,26 @@ public class ContactsApplication {
         System.out.println("Which contact would you like to delete?");
         String contact = input.getString();
         List<String> contactFile = Response.readFile(p);
-
+        boolean contactFound = false;
+        for (int i = 0; i < contactFile.size(); i++){
+            String[] contactParts = contactFile.get(i).split(",");
+            if (contact.equalsIgnoreCase(contactParts[0])){
+                Response.contacts.remove(i);
+//                Response.names.remove(i);
+                Response.writeToFile();
+                System.out.println("" + contact + " has been deleted.");
+                returnToMenu();
+            }
+        }
+        if (!contactFound){
+            System.out.println("Input does not match any of your contacts. Would you like to re-enter and try again? [y/N] ");
+            boolean yes = input.yesNo();
+            if (yes){
+                deleteContact();
+            } else {
+                returnToMenu();
+            }
+        }
     }
 
     //SEARCH CONTACTS
