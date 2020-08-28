@@ -12,14 +12,15 @@ public class Response {
     static Path p = Paths.get("src/data/contacts.txt");
 
     //READ FILE
-    public static void readFile() {
+    public static List<String> readFile(Path p) {
         try {
-            names = Files.readAllLines(p);
+            names = Files.readAllLines(Response.p);
         } catch (
                 IOException e) {
             e.printStackTrace();
         }
         contacts = Contacts.nameStringsToContacts(names);
+        return names;
     }
 
     //WRITE FILE - ADD, EDIT AND DELETE

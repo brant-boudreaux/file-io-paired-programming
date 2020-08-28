@@ -1,4 +1,6 @@
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,7 +18,6 @@ public class ContactsApplication {
 
     static Path p = Paths.get("src/data/contacts.txt");
 
-
     public static void contactsMenu() {
         System.out.println("Welcome to your contacts!");
         System.out.println("1. View contacts.\n" +
@@ -25,7 +26,7 @@ public class ContactsApplication {
                 "4. Delete an existing contact.\n" +
                 "5. Exit.\n");
 
-        int selection = input.getInt(1, 5);
+        int selection = input.getInt();
 
         switch (selection) {
             case 1:
@@ -47,15 +48,12 @@ public class ContactsApplication {
     }
 
     public static void viewContacts() {
-        System.out.println("| Name       |  Phone Number   |");
-        System.out.println("--------------------------------");
-        List<String> contactFile = Response.names;
+        System.out.println("| Name       |  Phone Number   |  Email       |");
+        System.out.println("----------------------------------------------");
+        List<String> contactFile = Response.readFile(p);
         for (String line : contactFile) {
             String[] parts = line.split(",");
-            if (parts.length == 2) {
-                System.out.printf("| %-11s| ", parts[0]);
-                System.out.println(parts[1] + "   |");
-            }
+                System.out.println("| " + parts[0] + "   |");
         }
         returnToMenu();//return to the main menu
     }
@@ -67,6 +65,9 @@ public class ContactsApplication {
 
     //DELETE CONTACT
     public static void deleteContact() {
+        System.out.println("Which contact would you like to delete?");
+        String contact = input.getString();
+        List<String> contactFile = Response.readFile(p);
 
     }
 

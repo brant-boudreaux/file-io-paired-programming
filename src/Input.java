@@ -15,6 +15,7 @@ public class Input {
     public String getString(){
         return this.scanner.nextLine();
     }
+
     public boolean yesNo(){
         String response = getString();
         response = response.toLowerCase();
@@ -33,7 +34,7 @@ public class Input {
             num = this.scanner.nextInt();
             try {
                 if (num >= min && num <= max) {
-                    num = Integer.parseInt(getString());
+                    num = Integer.valueOf(getString());
                     flag = true;
                 } else {
                     System.out.println("Invalid response.");
@@ -47,7 +48,7 @@ public class Input {
     public int getInt(){
         int num = 0;
         try {
-            num = Integer.parseInt(getString());
+            num = Integer.valueOf(getString());
         } catch (NumberFormatException e) {
             System.out.println("Invalid response.");
             e.printStackTrace();
