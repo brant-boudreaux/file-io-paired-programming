@@ -15,7 +15,6 @@ public class ContactsApplication {
         contactsMenu();
     }
 
-
     static Path p = Paths.get("src/data/contacts.txt");
 
     public static void contactsMenu() {
