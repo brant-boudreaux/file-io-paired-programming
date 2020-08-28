@@ -1,8 +1,3 @@
-
-import org.w3c.dom.ls.LSOutput;
-
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -48,12 +43,12 @@ public class ContactsApplication {
     }
 
     public static void viewContacts() {
-        System.out.println("| Name       |  Phone Number   |  Email       |");
-        System.out.println("----------------------------------------------");
+        System.out.println("| Name       |  Phone Number   |");
+        System.out.println("--------------------------------");
         List<String> contactFile = Response.readFile(names);
         for (String line : contactFile) {
-            String[] parts = line.split(",");
-                System.out.println("| " + parts[0] + "   |");
+            String[] parts = line.split(", ");
+            System.out.println("| " + parts[0] + " " + parts[1] + "   |");
         }
         returnToMenu();//return to the main menu
     }
@@ -95,26 +90,6 @@ public class ContactsApplication {
 //        }
     }
 
-    // When contact doesn't exist and user wants to add
-    public static void addContact(String name){
-
-        System.out.println("Please enter the phone number: (xxx)xxx-xxxx");
-        String phoneNumber = input.getString().trim();
-        //boolean validated = validatePhoneNumber(phoneNumber);
-
-//        if (validated) {
-            names.add(name + " " + phoneNumber);
-            Response.writeToFile(names);
-            System.out.println("Contact added!");
-            returnToMenu();
-//        } else {
-//
-//            System.out.println("Invalid format: (xxx)xxx-xxxx");
-//            addContact(name);
-//
-//        }
-    }
-
 
     //DELETE CONTACT
     public static void deleteContact() {
@@ -123,11 +98,10 @@ public class ContactsApplication {
         boolean contactFound = false;
         for (int i = 0; i < names.size(); i++){
             String[] contactParts = names.get(i).split(", ");
+
             if (contact.equalsIgnoreCase(contactParts[0])){
                 names.remove(i);
-//                Response.names.remove(i);
                 Response.writeToFile(names);
-                System.out.println("" + contact + " has been deleted.");
                 returnToMenu();
             }
         }
@@ -155,31 +129,19 @@ public class ContactsApplication {
                 System.out.println("Name: " + parts[0] + "\n" + "Number: " + parts[1]);
                 found = true;
                 returnToMenu();
-
             }
         }
-
         if (!found) {
             System.out.println("Contact not found!\nWould you like to add this contact? Y | N ");
             boolean add = input.yesNo();
             if (add) {
-                addContact(contact);
+                addContact();
             } else {
                 returnToMenu();
             }
         }
     }
 
-    public static void searchContacts(String name) {
-        List<String> searchFile = Response.readFile(names);
-
-        for (String contact : searchFile){
-            String[] parts = contact.split(",");
-            if (name.equalsIgnoreCase(parts[0])){
-                System.out.println("Name: " + parts[0] + "\n" + "Number: " + parts[0]);
-            }
-        }
-    }
 
     //RETURN TO MENU
     public static void returnToMenu() {

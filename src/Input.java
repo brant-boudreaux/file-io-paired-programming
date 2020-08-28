@@ -55,34 +55,4 @@ public class Input {
         }
         return num;
     }
-
-    double getDouble(double min, double max){
-        boolean flag = false;
-        double dubNum;
-        do {
-            dubNum = this.scanner.nextDouble();
-            try {
-                if (dubNum >= min && dubNum <= max) {
-                    dubNum = Double.parseDouble(getString());
-                    flag = true;
-                } else {
-                    System.out.println("Invalid response.");
-                }
-            } catch(NumberFormatException e) {
-                System.out.println("Invalid Response");
-                e.printStackTrace();
-            }
-        } while (!flag);
-        return dubNum;
-    }
-    public double getDouble(){
-        double num = Double.parseDouble(getString());
-        try {
-            num = Double.parseDouble(getString());
-        } catch (NumberFormatException e) {
-            System.out.println("Invalid response.");
-            e.printStackTrace();
-        }
-        return num;
-    }
 }
