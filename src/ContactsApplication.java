@@ -134,8 +134,43 @@ public class ContactsApplication {
     }
 
     //SEARCH CONTACTS
-    public static void searchContacts() {
+    static public void searchContacts(){
+        System.out.println("Search contact by name:");
+        String contact = input.getString();
+        List<String> contactFile = Response.readFile(p);
+        boolean found = false;
+        for (String line : contactFile) {
+            String[] parts = line.split(",");
 
+            if (contact.equalsIgnoreCase(parts[0])) {
+                System.out.println("Name: " + parts[0] + "\n" + "Number: " + parts[0]);
+                found = true;
+                returnToMenu();
+
+            }
+        }
+
+        if (!found) {
+            System.out.println("Contact not found!\nWould you like to add this contact? Y | N ");
+            boolean add = input.yesNo();
+            if (add) {
+                addContact(contact);
+            } else {
+                returnToMenu();
+            }
+        }
+
+    }
+
+    public static void searchContacts(String name) {
+        List<String> searchFile = Response.readFile(p);
+
+        for (String contact : searchFile){
+            String[] parts = contact.split(",");
+            if (name.equalsIgnoreCase(parts[0])){
+                System.out.println("Name: " + parts[0] + "\n" + "Number: " + parts[0]);
+            }
+        }
     }
 
     //RETURN TO MENU
