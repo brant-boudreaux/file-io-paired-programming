@@ -26,6 +26,7 @@ public class ContactsApplication {
                 "3. Search a contact by name.\n" +
                 "4. Delete an existing contact.\n" +
                 "5. Exit.\n");
+        //Add an edit method
 
         int selection = input.getInt();
 
@@ -49,12 +50,12 @@ public class ContactsApplication {
     }
 
     public static void viewContacts() {
-        System.out.println("| Name       |  Phone Number   |  Email       |");
+        System.out.println("| Name       |  Phone Number   |");
         System.out.println("----------------------------------------------");
         List<String> contactFile = Response.readFile(names);
         for (String line : contactFile) {
-            String[] parts = line.split(",");
-                System.out.println("| " + parts[0] + "   |");
+            String[] parts = line.split(", ");
+                System.out.println("| " + parts[0] + " " + parts[1] + "   |");
         }
         returnToMenu();//return to the main menu
     }
@@ -64,21 +65,21 @@ public class ContactsApplication {
         System.out.println("What is the name of your new contact?");
         String name = input.getString().trim();
         List<String> contactFile = Response.readFile(names);
-//        for (String line : contactFile) {
-//            String[] parts = line.split(" ");
-//            //if (name.equalsIgnoreCase(parts[0])) {
-//                //System.out.println("There is already a contact by this name:");
-//                //searchContact(name);
-//                //System.out.println("\nWould you like to add another contact with this name? Y | N");
-//                //boolean yes = input.yesNo();
-//                //if (yes) {
-//                    addContact(name);
-//                    return;
-//              //  } else {
-//              //      returnToMenu();
-//               // }
-//            //}
-//        }
+        for (String line : contactFile) {
+            String[] parts = line.split(" ");
+            if (name.equalsIgnoreCase(parts[0])) {
+                System.out.println("There is already a contact by this name:");
+                searchContact(name);
+                System.out.println("\nWould you like to add another contact with this name? Y | N");
+                boolean yes = input.yesNo();
+                if (yes) {
+                    addContact(name);
+                    return;
+                } else {
+                    returnToMenu();
+                }
+            }
+        }
         System.out.println("Please enter the phone number: (xxx)xxx-xxxx");
         String phoneNumber = input.getString().trim();
         //boolean validated = validatePhoneNumber(phoneNumber);
@@ -126,7 +127,6 @@ public class ContactsApplication {
             String[] contactParts = names.get(i).split(", ");
             if (contact.equalsIgnoreCase(contactParts[0])){
                 names.remove(i);
-//                Response.names.remove(i);
                 Response.writeToFile(names);
                 System.out.println("" + contact + " has been deleted.");
                 returnToMenu();
@@ -167,17 +167,6 @@ public class ContactsApplication {
                 addContact(contact);
             } else {
                 returnToMenu();
-            }
-        }
-    }
-
-    public static void searchContacts(String name) {
-        List<String> searchFile = Response.readFile(names);
-
-        for (String contact : searchFile){
-            String[] parts = contact.split(",");
-            if (name.equalsIgnoreCase(parts[0])){
-                System.out.println("Name: " + parts[0] + "\n" + "Number: " + parts[0]);
             }
         }
     }
