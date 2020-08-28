@@ -10,7 +10,7 @@ import java.util.List;
 
 public class ContactsApplication {
     static Input input = new Input();
-
+    static List<String> names = Response.readFile(Response.p);
     public static void main(String[] args) {
         contactsMenu();
     }
