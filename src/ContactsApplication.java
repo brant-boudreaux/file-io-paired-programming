@@ -36,8 +36,9 @@ public class ContactsApplication {
                 deleteContact();
                 break;
             case 5:
-                System.out.println("GoodBye!");
+                goodbyeGenerator();
                 break;
+
         }
     }
 
@@ -64,7 +65,9 @@ public class ContactsApplication {
                 autoSearch(name);
                 System.out.println("\nWould you like to add another contact with this name? Y | N");
                 boolean yes = input.yesNo();
-                if (!yes) {
+                if (yes) {
+                    break;
+                } else {
                     returnToMenu();
                 }
             }
@@ -164,6 +167,21 @@ public class ContactsApplication {
         }
     }
 
+    public static void goodbyeGenerator(){
+        String[] goodbyes = {"Goodbye", "auf Wiedersehen", "Adios", "Ciao", "Adieu"};
+        int randomNumber = (int) (Math.random() * 10);
+        boolean valid = false;
+        do {
+            if (randomNumber < goodbyes.length) {
+                System.out.println(goodbyes[randomNumber]);
+                valid = true;
+            } else {
+                goodbyeGenerator();
+                break;
+            }
+        } while (!valid);
+    }
+
 
     //RETURN TO MENU
     public static void returnToMenu() {
@@ -173,7 +191,7 @@ public class ContactsApplication {
         if (confirm) {
             contactsMenu();
         } else {
-            System.out.println("bye");
+            goodbyeGenerator();
         }
     }
 }
