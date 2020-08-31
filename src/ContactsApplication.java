@@ -43,14 +43,14 @@ public class ContactsApplication {
     }
 
     public static void viewContacts() {
-        System.out.println("| Name       |  Phone Number   |");
-        System.out.println("----------------------------------------------");
+        System.out.println("| Name       |  Phone Number   |             Email              |   Group |");
+        System.out.println("---------------------------------------------------------------------------");
         List<String> contactFile = Response.readFile(names);
         for (String line : contactFile) {
             String[] parts = line.split(", ");
-                System.out.println("| " + parts[0] + " " + parts[1] + "   |");
+                System.out.println("| " + parts[0] + "  " + parts[1] + "   |   " + "parts[2]" + "     |     " + "parts[3]");
         }
-        returnToMenu();//return to the main menu
+        returnToMenu();
     }
 
     //ADD CONTACT
